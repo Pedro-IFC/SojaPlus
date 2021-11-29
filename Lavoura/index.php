@@ -7,7 +7,7 @@
     session_start();
     if (isset($_SESSION['msg'])) {
         ?>
-            <script type="text/javascript">
+            <script type="text/javascript" defer>
                 alert("<?php echo $_SESSION['msg']; ?>");
             </script>
         <?php
@@ -17,7 +17,7 @@
     if (!isset($_SESSION['idSojaPlusUser'])) {
         header('location: ../login.php'); 
     } else {
-        $id = $_SESSION['id'];
+        $id = $_SESSION['idSojaPlusUser'];
         $sql = "SELECT * FROM usuario WHERE id = '$id'";
         $pdo = Conexao::getInstance();
         $consulta = $pdo->query($sql);
@@ -68,7 +68,7 @@
         .lavoura{
             background-color: rgba(255, 255, 255);
             border-radius: 30px;
-            width: 60%;
+            width: 75%;
             align-items: center;
         }
         .horizontal{

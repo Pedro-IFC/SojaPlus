@@ -20,6 +20,37 @@
     		$stmt = $pdo->prepare('DELETE FROM SOJA WHERE idLavoura = :idLavoura ;');
     		$stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
     		$stmt->execute();
+
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM SENSORES WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM HISTORICO WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM PRODUTOSQUIMICOS WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM CORRECAO WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM `LOGS` WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM DOCANALISE WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
+            
             $pdo = Conexao::getInstance();
             $stmt = $pdo->prepare('DELETE FROM SENSORESHISTORICO WHERE idLavoura = :idLavoura;');
             $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);

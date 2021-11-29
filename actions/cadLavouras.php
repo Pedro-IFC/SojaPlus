@@ -30,5 +30,14 @@
     $stmt->bindParam(':idLavoura', $idLavoura, PDO::PARAM_INT);
     $stmt->bindParam(':estagio', $estagio, PDO::PARAM_STR);
     $stmt->execute();
+    
+    $dados="Lavoura foi cadastrada";
+
+    $pdo = Conexao::getInstance();
+    $stmt = $pdo->prepare('INSERT INTO HISTORICO(idLavoura, dados) VALUES(:idLavoura, :dados)');
+    $stmt->bindParam(':idLavoura', $idLavoura, PDO::PARAM_INT);
+    $stmt->bindParam(':dados', $dados, PDO::PARAM_STR);
+    $stmt->execute();
+
     echo "sucess"; 
 ?>

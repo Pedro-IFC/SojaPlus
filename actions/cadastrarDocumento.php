@@ -17,12 +17,21 @@
         $Mg =explode(',',$quant)[3];
 
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('INSERT INTO docanalise(idLavoura, data, P, K, Ca, Mg) VALUES(:idLavoura, NULL, :P, :K, :Ca, :Mg)');
+        $stmt = $pdo->prepare('INSERT INTO docanalise(idLavoura, P, K, Ca, Mg) VALUES(:idLavoura, :P, :K, :Ca, :Mg)');
         $stmt->bindParam(':idLavoura', $idLavoura, PDO::PARAM_STR);
         $stmt->bindParam(':P', $P, PDO::PARAM_STR);
         $stmt->bindParam(':K', $K, PDO::PARAM_STR);
         $stmt->bindParam(':Ca', $Ca, PDO::PARAM_STR);
         $stmt->bindParam(':Mg', $Mg, PDO::PARAM_STR);
+        $stmt->execute();
+
+        
+        $dados="Documento de análise do solo cadastrado";
+
+        $pdo = Conexao::getInstance();
+        $stmt = $pdo->prepare('INSERT INTO HISTORICO(idLavoura, dados) VALUES(:idLavoura, :dados)');
+        $stmt->bindParam(':idLavoura', $idLavoura, PDO::PARAM_INT);
+        $stmt->bindParam(':dados', $dados, PDO::PARAM_STR);
         $stmt->execute();
 
 		echo "sucess";       

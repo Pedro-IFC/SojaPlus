@@ -28,7 +28,9 @@
         $pdoC = Conexao::getInstance();
         $consultaC = $pdoC->query($sqlC);
         $linhaC=$consultaC->fetch(PDO::FETCH_BOTH);
-        echo '<center>Proposta de correção do solo '.$linhaC['retorno'].'</center><br>';
+        if ($linhaC!="") {
+            echo '<center>'.$linhaC['retorno'].'<br><small>Correção proposta há'.$linhaC['data'].' </small></center><br>';
+        }
 
         $idLavoura=$linha['id'];
         $sql3 = "SELECT estagio FROM SOJA WHERE idLavoura = '$idLavoura';";
@@ -36,7 +38,7 @@
         $consulta3 = $pdo3->query($sql3);
         $linha3 = $consulta3->fetch(PDO::FETCH_BOTH);
         if ($linha3!="") {
-            echo '<img src="../img/Estágios da Soja/'.$linha3['estagio'].'.png" height="50px"><br>';
+            echo '<img src="../img/Estágios da Soja/'.$linha3['estagio'].'.png" height="75px"><br>';
             switch ($linha3['estagio']) {
                 case 'V0':
                     $proxEstagio="V1";
@@ -90,11 +92,20 @@
                     $proxEstagio="F";
                 break;
             }
-            echo '<a href="../actions/passar-stagio.php?idLavoura='.$idLavoura.'&prox='.$proxEstagio.'">Passar estágio[de '.$linha3['estagio'].' para '.$proxEstagio.']</a>  -  ';
+            echo '<a href="../actions/passarEstagio.php?idLavoura='.$idLavoura.'&prox='.$proxEstagio.'">Passar estágio[de '.$linha3['estagio'].' para '.$proxEstagio.']</a>  -  ';
             echo '<a href="alterar.php?idLavoura='.$idLavoura.'">Alterar Lavoura</a>  -  ';
             echo '<a href="../actions/excluir.php?idLavoura='.$idLavoura.'">Excluir Lavoura</a>  -  ';
-            echo '<a href="../docAnalise/index.php?idLavoura='.$idLavoura.'">Adicionar docAnalise</a>  -  ';
-            echo '<a href="../docAnalise/index.php?idLavoura='.$idLavoura.'">Adicionar Produto</a><br><hr>';
+            echo '<a href="../actions/historico.php?idLavoura='.$idLavoura.'">Emitir Historico</a>  -  ';
+            echo '<a href="../docAnalise/index.php?idLavoura='.$idLavoura.'">Adicionar docAnalise</a>';
+
+            $sqlD = "SELECT * FROM DOCANALISE WHERE idLavoura = '".$linha['id']."';";
+            $pdoD = Conexao::getInstance();
+            $consultaD = $pdo->query($sqlD);
+            $linhaD=$consultaD->fetch(PDO::FETCH_BOTH);
+
+            if ($linhaD!="") {
+                echo '  -  <a href="../docAnalise/index.php?idLavoura='.$idLavoura.'">Adicionar Produto</a><br><hr>';
+            }
             echo "<br><br>";
             echo '</div></center><br><br>';
         }
