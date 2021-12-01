@@ -1,0 +1,1 @@
+//associar sensores à uma lavoura
