@@ -37,9 +37,14 @@ td{
     
     $id = $_SESSION['idSojaPlusUser'];
 
-    echo "<h4 style='font-size: 35px;'class='header center'>Suas lavouras</h4>";
-    $sql = "SELECT * FROM LAVOURA WHERE idUsuario = '$id';";
+    $sql = "SELECT count(*) FROM LAVOURA WHERE idUsuario = '$id';";
     $pdo = Conexao::getInstance();
+    $consulta = $pdo->query($sql);
+    $linha=$consulta->fetch(PDO::FETCH_BOTH);
+    if ($linha['count(*)']>0) {
+        echo "<h4 style='font-size: 35px;'class='header center'>Suas lavouras</h4>";
+    }
+    $sql = "SELECT * FROM LAVOURA WHERE idUsuario = '$id';";
     $consulta = $pdo->query($sql);
     while($linha = $consulta->fetch(PDO::FETCH_BOTH)){
         echo '<div class="lavoura" align= "center">
@@ -88,7 +93,7 @@ td{
         if ($linhaC!="") {
             echo '<center>'.$linhaC['retorno'].'<br>Correção proposta na data '.$linhaC['data'].'</center><br>';
         }else{
-            echo 'Cadastre seu documento de análise do solo e espere pacientimente';
+            echo 'Cadastre seu documento de análise do solo e espere pacientemente';
         }
 
         echo "</td>";
@@ -101,7 +106,6 @@ td{
         $consulta3 = $pdo3->query($sql3);
         $linha3 = $consulta3->fetch(PDO::FETCH_BOTH);
         if ($linha3!="") {
-            echo '<img src="../img/Estágios da Soja/'.$linha3['estagio'].'.png" height="75px"><br>';
             switch ($linha3['estagio']) {
                 case 'V0':
                     $proxEstagio="V1";
@@ -156,31 +160,47 @@ td{
                 break;
             }
 
-            echo "</td>";
+            
+            if($linha3['estagio']!="F"){
+                echo '<img src="../img/Estágios da Soja/'.$linha3['estagio'].'.png" height="75px"><br>';
+                echo "</td>";
+                echo "<td>";
+                echo '<a href="../actions/passarEstagio.php?idLavoura='.$idLavoura.'&prox='.$proxEstagio.'"><font color="#000000">Avançar estágio</font></a>';
+                echo "</td>";
 
-            echo "<td>";
-            echo '<a href="../actions/passarEstagio.php?idLavoura='.$idLavoura.'&prox='.$proxEstagio.'"><font color="#000000">Avançar estágio</font></a>';
-            echo "</td>";
+                echo "<td>";
+                echo '<a href="../actions/excluir.php?idLavoura='.$idLavoura.'"><font color="#000000">Excluir</font></a>';
+                echo "</td>";
 
-            echo "<td>";
-            echo '<a href="../actions/excluir.php?idLavoura='.$idLavoura.'"><font color="#000000">Excluir</font></a>';
-            echo "</td>";
+                echo "<td>";
+                echo '<a href="../actions/historico.php?idLavoura='.$idLavoura.'"><font color="#000000">Emitir</font></a>';
+                echo "</td>";
 
-            echo "<td>";
-            echo '<a href="../actions/historico.php?idLavoura='.$idLavoura.'"><font color="#000000">Emitir</font></a>';
-            echo "</td>";
+                echo "<td>";
+                echo '<a href="../docAnalise/index.php?idLavoura='.$idLavoura.'"><font color="#000000">Adicionar</font></a>';
+                echo "</td>";
 
-            echo "<td>";
-            echo '<a href="../docAnalise/index.php?idLavoura='.$idLavoura.'"><font color="#000000">Adicionar</font></a>';
-            echo "</td>";
+                $sqlD = "SELECT * FROM DOCANALISE WHERE idLavoura = '".$linha['id']."';";
+                $pdoD = Conexao::getInstance();
+                $consultaD = $pdo->query($sqlD);
+                $linhaD=$consultaD->fetch(PDO::FETCH_BOTH);
 
-            $sqlD = "SELECT * FROM DOCANALISE WHERE idLavoura = '".$linha['id']."';";
-            $pdoD = Conexao::getInstance();
-            $consultaD = $pdo->query($sqlD);
-            $linhaD=$consultaD->fetch(PDO::FETCH_BOTH);
+                if ($linhaD!="") {
+                    echo '</tr></table><br><a href="../produto/index.php?idLavoura='.$idLavoura.'" class="btn purple darken-2">Adicionar Produto</a><br><br>';
+                }
+            }else{
+                echo "Finalizado, pronto para colheita</td>";
+                echo "<td></td>";
 
-            if ($linhaD!="") {
-                echo '</tr></table><br><a href="../produto/index.php?idLavoura='.$idLavoura.'" class="btn purple darken-2">Adicionar Produto</a><br><br>';
+                echo "<td>";
+                echo '<a href="../actions/excluir.php?idLavoura='.$idLavoura.'"><font color="#000000">Excluir</font></a>';
+                echo "</td>";
+
+                echo "<td>";
+                echo '<a href="../actions/historico.php?idLavoura='.$idLavoura.'"><font color="#000000">Emitir</font></a>';
+                echo "</td>";
+
+                echo "<td></td>";
             }
         
             echo "</tr></table>";

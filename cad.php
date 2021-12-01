@@ -10,15 +10,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="shortcut icon" href="./img/SojaPlus.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Cadastro</title>
-
       <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
         body{
             background-image: url("img/soja-fundo.jpg");
             background-repeat: no-repeat;
             background-size: cover;
-            font-family: "Crimson";
+            font-family: "Open Sans";
             color: white;
             margin-bottom: 0px;
             padding-bottom: 0px;
@@ -55,7 +56,7 @@
             margin-right: 20px;*/
             background-color: rgb(51,105,27);
             font-size: 30px;
-            font-family: "Crimson";
+            font-family: "Open Sans";
         }
         .footer{
             position:absolute;
@@ -185,8 +186,8 @@
         <footer class="page-footer light-green darken-4">
           <div class="container">
           <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
+            <div class="container" align="center">
+            © 2021 Copyright SojaPlus
             <a class="grey-text text-lighten-4 right" href="#!"></a>
             </div>
           </div>

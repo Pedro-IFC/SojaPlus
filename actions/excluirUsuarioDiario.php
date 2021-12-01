@@ -39,6 +39,11 @@
             $stmt = $pdo->prepare('DELETE FROM CORRECAO WHERE idLavoura = :idLavoura;');
             $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
             $stmt->execute();
+
+            $pdo = Conexao::getInstance();
+            $stmt = $pdo->prepare('DELETE FROM RECEITA WHERE idLavoura = :idLavoura;');
+            $stmt->bindParam(":idLavoura", $idLavoura, PDO::PARAM_STR);
+            $stmt->execute();
             
             $pdo = Conexao::getInstance();
             $stmt = $pdo->prepare('DELETE FROM DOCANALISE WHERE idLavoura = :idLavoura;');

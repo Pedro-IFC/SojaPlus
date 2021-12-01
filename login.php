@@ -21,17 +21,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="shortcut icon" href="./img/SojaPlus.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Login de Usuário</title>
     <link rel="stylesheet" type="text/css" href="css-adicional/css.css">
 
     <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
         body{
             background-image: url("img/soja-fundo1.jpg");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            font-family: "Crimson";
+            font-family: "Open Sans";
             color: white;
             display: flex;
             font-size: 80.31%;
@@ -69,7 +71,7 @@
             margin-right: 2.6%;
             background-color: rgb(51,105,27);
             font-size: 3.9%;
-            font-family: "Crimson";
+            font-family: "Open Sans";
         }
         #forms{
             padding-right: 25.62%;
@@ -131,7 +133,7 @@
     <footer class="page-footer light-green darken-4" style="position:absolute;
             bottom:0;
             width:100%;">
-          <div class="container">
+          <div class="container" align="center">
           <div class="footer-copyright">
             <div class="container">
             © 2021 Copyright SojaPlus

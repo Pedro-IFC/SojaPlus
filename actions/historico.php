@@ -3,7 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title></title>
+  <title>Histórico</title>
+  <link rel="shortcut icon" href="../img/SojaPlus.png">
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -137,9 +138,8 @@
                             }elseif($linha['dados']=="Correção cadastrada"){
                                 $sqlS = "SELECT * FROM CORRECAO WHERE idLavoura = '$idLavoura' AND `DATA` = '$data'";
                                 $consultaS = $pdo->query($sqlS);
-                                while($subLinha=$consultaS->fetch(PDO::FETCH_BOTH)){
+                                $subLinha=$consultaS->fetch(PDO::FETCH_BOTH);
                                   echo "<blockquote>".$subLinha['retorno']."</blockquote><br><br>";
-                                }
                             }elseif($linha['dados']=="Adicionados produtos à lavoura"){
                                 $sqlS = "SELECT * FROM PRODUTOSQUIMICOS WHERE idLavoura = '$idLavoura' AND `DATA` = '$data'";
                                 $consultaS = $pdo->query($sqlS);
