@@ -78,8 +78,7 @@ td{
       
         $idCidade=$linha['idCidade'];
         $sql2 = "SELECT nome FROM CIDADE WHERE id = '$idCidade';";
-        $pdo2 = Conexao::getInstance();
-        $consulta2 = $pdo2->query($sql2);
+        $consulta2 = $pdo->query($sql2);
         $linha2 = $consulta2->fetch(PDO::FETCH_BOTH);
         
         echo '<img src="../img/alto-vale/'.$linha2['nome'].'.png" height="100px">';
@@ -87,15 +86,22 @@ td{
         echo "</td><td>";
 
         $sqlC = "SELECT * FROM CORRECAO WHERE idLavoura = '".$linha['id']."' ORDER BY id DESC;";
-        $pdoC = Conexao::getInstance();
-        $consultaC = $pdoC->query($sqlC);
+        $consultaC = $pdo->query($sqlC);
         $linhaC=$consultaC->fetch(PDO::FETCH_BOTH);
         if ($linhaC!="") {
             echo '<center>'.$linhaC['retorno'].'<br>Correção proposta na data '.$linhaC['data'].'</center><br>';
         }else{
-            echo 'Cadastre seu documento de análise do solo e espere pacientemente';
+            echo 'Cadastre seu documento de análise do solo e espere pacientemente<br>';
         }
 
+        $sqlReceita = "SELECT * FROM RECEITA WHERE idLavoura = '".$linha['id']."';";
+        $consultaR = $pdo->query($sqlReceita);
+        $linhaR=$consultaR->fetch(PDO::FETCH_BOTH);
+        if ($linhaR!="") {
+            echo '<center>Previsão de lucro R$ '.$linhaR['receita'].'</center>';
+        }else{
+            echo 'Sem lucro cadastrada';
+        }
         echo "</td>";
 
         echo "<td>";

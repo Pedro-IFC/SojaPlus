@@ -61,14 +61,13 @@
             $stmt->execute();
         }
 
-        $pdo = Conexao::getInstance();
+        $stmt = $pdo->prepare('DELETE FROM EXCLUIR WHERE id= :idE ;');
+        $stmt->bindParam(":idE", $linha['id'], PDO::PARAM_STR);
+        $stmt->execute();
+
         $stmt = $pdo->prepare('DELETE FROM USUARIO WHERE id= :id ;');
         $stmt->bindParam(":id", $id, PDO::PARAM_STR);
         $stmt->execute();
 
-        $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('DELETE FROM EXCLUIR WHERE id= :idE ;');
-        $stmt->bindParam(":idE", $linha['id'], PDO::PARAM_STR);
-        $stmt->execute();
     }
 ?>
